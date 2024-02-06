@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formularz reklamacji</title>
+    <link rel="stylesheet" href="form-style.css">
+</head>
+<body>
+    <section class="contact" id="contact">
+        <h1>Formularz reklamacji</h1>
+          <div class="contactForm">
+            <form>
+              <div class="inputBox">
+                <input type="date" id="data" name="data" required>
+                <span>Data</span>
+              </div>
+
+              <!-- <div class="inputBox">
+                <select id="oddzial" name="oddzial" required>
+                  <option hidden selected>Wybierz oddział</option>
+                  <option value="Oddzial 1">Oddzial 1</option>
+                </select>
+                <span>Oddział</span>
+              </div> -->
+
+              <!-- <div class="inputBox">
+                <select id="oddzialAdres" name="oddzial" required>
+                  <option hidden selected>Wybierz adres oddziału</option>
+                  <option value="Adres1,<br> 0-000 Miasto">Adres 1</option>
+                </select>
+                <span>Adres oddziału</span>
+              </div> -->
+
+              <div class="inputBox">
+                <input type="text" id="nrProtokolu" name="nrProtokolu" required>
+                <span>Numer protokołu</span>
+              </div>
+
+              <div class="inputBox">
+                <input type="text" id="nrDokumentuZakupu" name="nrDokumentuZakupu" required>
+                <span>Numer dokumentu zakupu</span>
+              </div>
+
+              <div class="inputBox">
+                <input type="date" id="dataDokumentuZakupu" name="dataDokumentuZakupu" required>
+                <span>Data zakupu</span>
+              </div>
+
+              <div class="inputBox">
+                <select id="tytulReklamacji" name="tytulReklamacji" required>
+                  <option hidden selected>Wybierz tytuł reklamacji</option>
+                  <option value="Gwarancji">Gwarancja</option>
+                  <option value="Rękojmi">Rękojmia</option>
+                </select>
+                <span>Z tytułu</span>
+              </div>
+
+              <div class="inputBox">
+                <input type="text" id="nazwaTowaru" name="nazwaTowaru" required>
+                <span>Nazwa towaru</span>
+              </div>
+
+              <div class="inputBox">
+                <input type="number" id="kodTowaru" name="kodTowaru" required>
+                <span>Kod kreskowy</span>
+              </div>
+
+              <div class="inputBox">
+                <input type="number" id="iloscTowaru" name="iloscTowaru" required>
+                <span>Ilość towaru</span>
+              </div>
+
+              <div class="inputBox">
+                <select id="jednEwidencyjna" name="jednEwidencyjna" required>
+                  <option hidden selected>Wybierz jednostkę</option>
+                  <option value="SZT">Sztuka</option>
+                  <option value="MB">Metr bieżący</option>
+                  <option value="M²">Metr kwadratowy</option>
+                  <option value="M³">Metr sześcienny</option>
+                </select>
+                <span>Jednostka ewidencyjna</span>
+              </div>
+
+              <div class="inputBox">
+                <textarea id="zglaszaneUsterki" name="zglaszaneUsterki" rows="4" cols="50" required></textarea>
+                <span>Zgłaszane usterki</span>
+              </div>
+
+              <div class="inputBox">
+                <textarea id="zadaniaReklamujacego" name="zadaniaReklamujacego" required></textarea>
+                <span>Żądania reklamującego</span>
+              </div>
+
+              <div class="inputBox">
+                <input type="button" value="Generuj dokument" onclick="generateDocument()">
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      <script>
+function generateDocument() {
+            let data = document.getElementById("data").value;
+            let oddzial = "Oddzial";
+            let oddzialAdres = "Ulica 1A,<br> 00-000 Miasto";
+            let nrProtokolu = document.getElementById("nrProtokolu").value;
+            let nrDokumentuZakupu = document.getElementById("nrDokumentuZakupu").value;
+            let dataDokumentuZakupu = document.getElementById("dataDokumentuZakupu").value;
+            let tytulReklamacji = document.getElementById("tytulReklamacji").value;
+            let nazwaTowaru = document.getElementById("nazwaTowaru").value;
+            let kodTowaru = document.getElementById("kodTowaru").value;
+            let iloscTowaru = document.getElementById("iloscTowaru").value;
+            let jednEwidencyjna = document.getElementById("jednEwidencyjna").value;
+            let zglaszaneUsterki = document.getElementById("zglaszaneUsterki").value;
+            let zadaniaReklamujacego = document.getElementById("zadaniaReklamujacego").value;
+            
+            const fields = [
+              "data",
+              "nrProtokolu",
+              "nrDokumentuZakupu",
+              "dataDokumentuZakupu",
+              "tytulReklamacji",
+              "nazwaTowaru",
+              "kodTowaru",
+              "iloscTowaru",
+              "jednEwidencyjna",
+              "zglaszaneUsterki",
+              "zadaniaReklamujacego"
+            ];
+
+            const formData = {};
+
+            for (const field of fields) {
+              const element = document.getElementById(field);
+              if (!element || !element.value) {
+                alert("Proszę uzupełnić wszystkie pola przed wygenerowaniem dokumentu.");
+                return;
+              }
+              formData[field] = element.value;
+            }
+  
+
+            let docContent = `
+            <!DOCTYPE html>
+            <html lang="pl">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="stylesheet" href="document-style.css">
+                <title>Protokół reklamacyjny</title>
+            </head>
+            <body style="--bleeding: 0.5cm;--margin: 1cm;">
+                <div class="page">
+                    <section class="complaint-document">
+                        <div class="doc-header">
+                            <img style="height: 6vh; width: auto; margin-bottom: 2%" src="logo.png">
+                            <p>Nazwa firmy</p><br>
+                            <p>Ulica</p><br>
+                            <p>Kod pocztowy, miasto</p><br>
+                            <p>NIP</p><br>
+                            <p>ODDZIAŁ: <p style="font-style: italic; background-color: lightgray;"> ${oddzial} </p></p><br>
+                            <p>ADRES: <p style="font-style: italic; background-color: lightgray;"> ${oddzialAdres} </p></p><br>
+                        </div>
+                        <div class="date">
+                            <p>DNIA: <p style="font-style: italic;"> ${data} </p></p>
+                        </div>
+                        <div class="protocol-number">
+                            <p>PROTOKÓŁ REKLAMACYJNY NR: <p style="font-style: italic; background-color: lightgray;"> ${nrProtokolu} </p></p>
+                        </div>
+                        <div class="protocol-content">
+                            <p>NUMER DOKUMENTU ZAKUPU: <p style="font-style: italic; background-color: lightgray;"> ${nrDokumentuZakupu}</p>,</p> <p>Z DNIA: <p style="font-style: italic; background-color: lightgray">${dataDokumentuZakupu}</p></p><br>
+                            <p>KLIENT KORZYSTA Z PRAWA DO REKLAMACJI Z TYTUŁU <p style="font-style: italic; background-color: lightgray;"> ${tytulReklamacji}:</p></p><br>
+                            <p>NAZWA TOWARU: <p style="font-style: italic; background-color: lightgray;"> ${nazwaTowaru} </p><br></p> 
+                            <p>ILOŚĆ REKLAMOWANEGO TOWARU: <p style="font-style: italic; background-color: lightgray;"> ${iloscTowaru} ${jednEwidencyjna}</p></p><br>
+                            <p>KOD KRESKOWY: </p> <p style="font-style: italic; background-color: lightgray;"> ${kodTowaru} </p><br>
+                            <p>ZGŁASZANE USTERKI: </p> <p style="font-style: italic; background-color: lightgray;"> ${zglaszaneUsterki} </p><br>
+                            <p>ŻĄDANIA REKLAMUJĄCEGO: </p> <p style="font-style: italic; background-color: lightgray;"> ${zadaniaReklamujacego} </p>
+                        </div>
+                        <div style="border: 1px solid black" class="receiving-signature">
+                            <p>CZYTELNY PODPIS PRZYJMUJĄCEGO REKLAMACJĘ</p>
+                        </div>
+                        <div style="border: 1px solid black" class="complainer-signature">
+                            <p>CZYTELNY PODPIS REKLAMUJĄCEGO</p>
+                        </div>
+                    </section>
+                </div>
+            </body>
+            </html>`;
+            
+
+            let newWindow = window.open('', '_blank');
+
+            newWindow.document.write(docContent);
+
+            newWindow.document.close();
+            
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+:root {
+    --bleeding: 0.5cm;
+    --margin: 1cm;
+}
+
+    @page {
+    size: A4;
+    margin: 0;
+}
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    line-height: 2;
+    color: #000 !important;
+    font-weight: bold;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    text-transform: uppercase;
+}
+body p {
+    display: inline;
+}
+body {
+    margin: 0 auto;
+    padding: 0;
+    background: rgb(204, 204, 204);
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}
+.page {
+    display: inline-block;
+    position: relative;
+    height: 297mm;
+    width: 210mm;
+    font-size: 12pt;
+    margin: 2em auto;
+    padding: calc(var(--bleeding) + var(--margin));
+    box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+    background: white;
+}
+@media screen {
+.page::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: calc(100% - var(--bleeding) * 2);
+    height: calc(100% - var(--bleeding) * 2);
+    margin: var(--bleeding);
+    outline: thin dashed black;
+    pointer-events: none;
+    z-index: 9999;
+}
+}
+@media print {
+.page {
+    margin: 0;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+}
+
+}
+.complaint-document {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.doc-header {
+    width: 50%;
+    height: 30vh;
+    padding: 2%;
+}
+.date {
+    width: 50%;
+    height: 30vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 3% 0%;
+}
+.date p {
+    margin: 0;
+}
+.protocol-number {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.protocol-content {
+    width: 100%;
+    height: 40vh;
+    padding: 2%;
+}
+.receiving-signature {
+    width: 45%;
+    height: 15vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    font-size: 8px;
+}
+.complainer-signature {
+    width: 45%;
+    height: 15vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    font-size: 8px;
+    margin-left: 6.3%;
+}
