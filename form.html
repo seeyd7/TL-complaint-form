@@ -15,7 +15,7 @@
               </div>
 
               <!-- <div class="inputBox">
-                <select id="oddzial" name="oddzial" required>
+                <select id="department" name="department" required>
                   <option hidden selected>Wybierz oddział</option>
                   <option value="Oddzial 1">Oddzial 1</option>
                 </select>
@@ -23,7 +23,7 @@
               </div> -->
 
               <!-- <div class="inputBox">
-                <select id="oddzialAdres" name="oddzial" required>
+                <select id="departmentAddress" name="oddzial" required>
                   <option hidden selected>Wybierz adres oddziału</option>
                   <option value="Adres1,<br> 0-000 Miasto">Adres 1</option>
                 </select>
@@ -31,22 +31,22 @@
               </div> -->
 
               <div class="inputBox">
-                <input type="text" id="nrProtokolu" name="nrProtokolu" required>
+                <input type="text" id="protocolNumber" name="protocolNumber" required>
                 <span>Numer protokołu</span>
               </div>
 
               <div class="inputBox">
-                <input type="text" id="nrDokumentuZakupu" name="nrDokumentuZakupu" required>
+                <input type="text" id="invoiceNumber" name="invoiceNumber" required>
                 <span>Numer dokumentu zakupu</span>
               </div>
 
               <div class="inputBox">
-                <input type="date" id="dataDokumentuZakupu" name="dataDokumentuZakupu" required>
+                <input type="date" id="invoicePurchaseDate" name="invoicePurchaseDate" required>
                 <span>Data zakupu</span>
               </div>
 
               <div class="inputBox">
-                <select id="tytulReklamacji" name="tytulReklamacji" required>
+                <select id="complaintTitle" name="complaintTitle" required>
                   <option hidden selected>Wybierz tytuł reklamacji</option>
                   <option value="Gwarancji">Gwarancja</option>
                   <option value="Rękojmi">Rękojmia</option>
@@ -55,22 +55,22 @@
               </div>
 
               <div class="inputBox">
-                <input type="text" id="nazwaTowaru" name="nazwaTowaru" required>
+                <input type="text" id="productName" name="productName" required>
                 <span>Nazwa towaru</span>
               </div>
 
               <div class="inputBox">
-                <input type="number" id="kodTowaru" name="kodTowaru" required>
+                <input type="number" id="barcode" name="barcode" required>
                 <span>Kod kreskowy</span>
               </div>
 
               <div class="inputBox">
-                <input type="number" id="iloscTowaru" name="iloscTowaru" required>
+                <input type="number" id="amount" name="amount" required>
                 <span>Ilość towaru</span>
               </div>
 
               <div class="inputBox">
-                <select id="jednEwidencyjna" name="jednEwidencyjna" required>
+                <select id="unit" name="unit" required>
                   <option hidden selected>Wybierz jednostkę</option>
                   <option value="SZT">Sztuka</option>
                   <option value="MB">Metr bieżący</option>
@@ -81,12 +81,12 @@
               </div>
 
               <div class="inputBox">
-                <textarea id="zglaszaneUsterki" name="zglaszaneUsterki" rows="4" cols="50" required></textarea>
+                <textarea id="reportedFaults" name="reportedFaults" rows="4" cols="50" required></textarea>
                 <span>Zgłaszane usterki</span>
               </div>
 
               <div class="inputBox">
-                <textarea id="zadaniaReklamujacego" name="zadaniaReklamujacego" required></textarea>
+                <textarea id="customerDemand" name="customerDemand" required></textarea>
                 <span>Żądania reklamującego</span>
               </div>
 
@@ -102,29 +102,29 @@ function generateDocument() {
             let data = document.getElementById("data").value;
             let oddzial = "Oddzial";
             let oddzialAdres = "Ulica 1A,<br> 00-000 Miasto";
-            let nrProtokolu = document.getElementById("nrProtokolu").value;
-            let nrDokumentuZakupu = document.getElementById("nrDokumentuZakupu").value;
-            let dataDokumentuZakupu = document.getElementById("dataDokumentuZakupu").value;
-            let tytulReklamacji = document.getElementById("tytulReklamacji").value;
-            let nazwaTowaru = document.getElementById("nazwaTowaru").value;
-            let kodTowaru = document.getElementById("kodTowaru").value;
-            let iloscTowaru = document.getElementById("iloscTowaru").value;
-            let jednEwidencyjna = document.getElementById("jednEwidencyjna").value;
-            let zglaszaneUsterki = document.getElementById("zglaszaneUsterki").value;
-            let zadaniaReklamujacego = document.getElementById("zadaniaReklamujacego").value;
+            let protocolNumber = document.getElementById("protocolNumber").value;
+            let invoiceNumber = document.getElementById("invoiceNumber").value;
+            let invoicePurchaseDate = document.getElementById("invoicePurchaseDate").value;
+            let complaintTitle = document.getElementById("complaintTitle").value;
+            let productName = document.getElementById("productName").value;
+            let barcode = document.getElementById("barcode").value;
+            let amount = document.getElementById("amount").value;
+            let unit = document.getElementById("unit").value;
+            let reportedFaults = document.getElementById("reportedFaults").value;
+            let customerDemand = document.getElementById("customerDemand").value;
             
             const fields = [
               "data",
-              "nrProtokolu",
-              "nrDokumentuZakupu",
-              "dataDokumentuZakupu",
-              "tytulReklamacji",
-              "nazwaTowaru",
-              "kodTowaru",
-              "iloscTowaru",
-              "jednEwidencyjna",
-              "zglaszaneUsterki",
-              "zadaniaReklamujacego"
+              "protocolNumber",
+              "invoiceNumber",
+              "invoicePurchaseDate",
+              "complaintTitle",
+              "productName",
+              "barcode",
+              "amount",
+              "unit",
+              "reportedFaults",
+              "customerDemand"
             ];
 
             const formData = {};
@@ -164,16 +164,16 @@ function generateDocument() {
                             <p>DNIA: <p style="font-style: italic;"> ${data} </p></p>
                         </div>
                         <div class="protocol-number">
-                            <p>PROTOKÓŁ REKLAMACYJNY NR: <p style="font-style: italic; background-color: lightgray;"> ${nrProtokolu} </p></p>
+                            <p>PROTOKÓŁ REKLAMACYJNY NR: <p style="font-style: italic; background-color: lightgray;"> ${protocolNumber} </p></p>
                         </div>
                         <div class="protocol-content">
-                            <p>NUMER DOKUMENTU ZAKUPU: <p style="font-style: italic; background-color: lightgray;"> ${nrDokumentuZakupu}</p>,</p> <p>Z DNIA: <p style="font-style: italic; background-color: lightgray">${dataDokumentuZakupu}</p></p><br>
-                            <p>KLIENT KORZYSTA Z PRAWA DO REKLAMACJI Z TYTUŁU <p style="font-style: italic; background-color: lightgray;"> ${tytulReklamacji}:</p></p><br>
-                            <p>NAZWA TOWARU: <p style="font-style: italic; background-color: lightgray;"> ${nazwaTowaru} </p><br></p> 
-                            <p>ILOŚĆ REKLAMOWANEGO TOWARU: <p style="font-style: italic; background-color: lightgray;"> ${iloscTowaru} ${jednEwidencyjna}</p></p><br>
-                            <p>KOD KRESKOWY: </p> <p style="font-style: italic; background-color: lightgray;"> ${kodTowaru} </p><br>
-                            <p>ZGŁASZANE USTERKI: </p> <p style="font-style: italic; background-color: lightgray;"> ${zglaszaneUsterki} </p><br>
-                            <p>ŻĄDANIA REKLAMUJĄCEGO: </p> <p style="font-style: italic; background-color: lightgray;"> ${zadaniaReklamujacego} </p>
+                            <p>NUMER DOKUMENTU ZAKUPU: <p style="font-style: italic; background-color: lightgray;"> ${invoiceNumber}</p>,</p> <p>Z DNIA: <p style="font-style: italic; background-color: lightgray">${invoicePurchaseDate}</p></p><br>
+                            <p>KLIENT KORZYSTA Z PRAWA DO REKLAMACJI Z TYTUŁU <p style="font-style: italic; background-color: lightgray;"> ${complaintTitle}:</p></p><br>
+                            <p>NAZWA TOWARU: <p style="font-style: italic; background-color: lightgray;"> ${productName} </p><br></p> 
+                            <p>ILOŚĆ REKLAMOWANEGO TOWARU: <p style="font-style: italic; background-color: lightgray;"> ${amount} ${unit}</p></p><br>
+                            <p>KOD KRESKOWY: </p> <p style="font-style: italic; background-color: lightgray;"> ${barcode} </p><br>
+                            <p>ZGŁASZANE USTERKI: </p> <p style="font-style: italic; background-color: lightgray;"> ${reportedFaults} </p><br>
+                            <p>ŻĄDANIA REKLAMUJĄCEGO: </p> <p style="font-style: italic; background-color: lightgray;"> ${customerDemand} </p>
                         </div>
                         <div style="border: 1px solid black" class="receiving-signature">
                             <p>CZYTELNY PODPIS PRZYJMUJĄCEGO REKLAMACJĘ</p>
